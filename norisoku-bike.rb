@@ -5,7 +5,6 @@ require 'open-uri'
 require 'nokogiri'
 require 'rss'
 require './rss_cdata'
-require 'clockwork'
 
 $items = []
 class Item
