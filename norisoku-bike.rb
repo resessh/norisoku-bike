@@ -15,7 +15,9 @@ class Item
 		@title = document.xpath('//head/title').text.split(/\s+:\s+/)[0]
 		@description = document.xpath('//head/meta[@property="og:description"]/@content').text
 		@date = document.xpath('//time[@pubdate="pubdate"]/@datetime').text
-		@content_encoded = document.xpath('//div[@class="article-body-inner"]').inner_html
+		content = document.xpath('//div[@class="article-body-inner"]')
+		content.xpath('//div[@class="blogroll-channel"]').remove
+		@content_encoded = content.inner_html
 	end
 end
 
@@ -25,7 +27,6 @@ def get_page(page_address)
 		$items.push(Item.new(link))
 	end
 end
-
 
 get_page('http://norisoku.com/archives/cat_858196.html')
 get_page('http://norisoku.com/archives/cat_858196.html?p=2')
